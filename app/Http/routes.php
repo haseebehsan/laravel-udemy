@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-
+Route::group(['prefix' => 'pages'], function(){
 
 Route::get('/about/{name?}', function ($name = null) {
     return view('pages.about', ['name' => $name]);
@@ -28,6 +28,7 @@ Route::get('/blog', function () {
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
+});
 
 Route::post('/benice', function(\Illuminate\Http\Request $request){
     if(isset( $request['name'])){
