@@ -14,5 +14,13 @@
         
         @endfor
     </ul>
+    
+    <form action="{{ route('benice') }}" method="post">
+        
+        
+        <input type="text" name="name"/>
+        <button type="submit">Submit</button>
+        <input type="hidden" value="{{ Session::token() }}" name="_token">
+    </form>
 </div>
 @endsection

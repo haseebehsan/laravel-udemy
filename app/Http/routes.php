@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/home', function () {
-    return view('home');
-});
+
 
 Route::get('/about/{name?}', function ($name = null) {
     return view('pages.about', ['name' => $name]);
@@ -30,3 +28,14 @@ Route::get('/blog', function () {
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
+
+Route::post('/benice', function(\Illuminate\Http\Request $request){
+    if(isset( $request['name'])){
+        if(strlen($request['name']) > 0){
+            return view('actions.nice', ['name' => $request['name']]);
+        }
+    
+        return redirect()->back();
+    }
+    return redirect()->back();
+})->name('benice');
