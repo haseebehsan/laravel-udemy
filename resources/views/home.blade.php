@@ -8,7 +8,7 @@
     <ul>
         @for($i = 0; $i < 5 ; $i++)
         
-            @if($i % 2 == 0)
+            @if($i % 2 == 0)  
             <li></li>Iteration {{ $i+1 }}</li>
             @endif
         
