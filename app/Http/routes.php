@@ -17,26 +17,35 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'pages'], function(){
 
-Route::get('/about/{name?}', function ($name = null) {
-    return view('pages.about', ['name' => $name]);
-})->name('about');
+    Route::get('/about/{name?}', function ($name = null) {
+        return view('pages.about', ['name' => $name]);
+    })->name('about');
 
-Route::get('/blog', function () {
-    return view('pages.blog');
-})->name('blog');
+    Route::get('/blog', function () {
+        return view('pages.blog');
+    })->name('blog');
 
-Route::get('/contact', function () {
-    return view('pages.contact');
-})->name('contact');
+    Route::get('/contact', function () {
+        return view('pages.contact');
+    })->name('contact');
+
+
 });
 
-Route::post('/benice', function(\Illuminate\Http\Request $request){
-    if(isset( $request['name'])){
-        if(strlen($request['name']) > 0){
-            return view('actions.nice', ['name' => $request['name']]);
-        }
+Route::group(['prefix' => 'do'], function(){
+   Route::get('/{action}/{name?}', [
+       'uses' => 'NiceActionController@getNiceAction',
+       'as' => 'niceaction'
+       ]); 
+       
+       
     
-        return redirect()->back();
-    }
-    return redirect()->back();
-})->name('benice');
+    Route::post('/', [
+        'uses' => 'NiceActionController@postNiceAction',
+        'as' => 'benice'
+        ]);
+});
+
+
+
+
